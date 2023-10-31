@@ -69,7 +69,7 @@
 
       var diagramUrl = site + doc;
 
-      var file;
+      var BPMNfile;
       $.ajax(
         {
           url: site + doc,
@@ -77,11 +77,11 @@
           dataType: "XML",
           async: false,
           success: function(data){
-            file = data; 
+            BPMNfile = data; 
             }   
         });
 
-      console.log(file);
+      console.log(BPMNfile);
       
 
       // viewer instance
