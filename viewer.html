@@ -53,9 +53,11 @@
       
       var site = params.get("site");
       var doc = params.get("doc");
+      var key = params.get("key");
       
-      console.log(site); // "sai"
-      console.log(doc); // 10   
+      console.log(site);
+      console.log(doc);  
+      console.log(key); 
         
     if(site==null){
         var site='https://raw.githubusercontent.com/dpreputnik2/BPMN/main/';
@@ -110,10 +112,16 @@
           console.error('could not import BPMN 2.0 diagram', err);
         }
       }
-
+      
+        function API(){
+            $.ajax({
+                url: site + doc,
+                headers: {"Appian-API-Key": key}
+            });
+        }
 
       // load external diagram file via AJAX and open it
-      $.get(diagramUrl, openDiagram, 'text');
+      $.get(API, openDiagram, 'text');
     </script>
     <!--
       Thanks for trying out our BPMN toolkit!
