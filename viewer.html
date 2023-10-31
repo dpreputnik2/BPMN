@@ -68,6 +68,20 @@
     }       
 
       var diagramUrl = site + doc;
+
+      var file;
+      $.ajax(
+        {
+          url: site + doc,
+          headers: {"Appian-API-Key": key},
+          dataType: "XML",
+          async: false,
+          success: function(data){
+            file = data; 
+            }   
+        });
+
+      console.log(file);
       
 
       // viewer instance
@@ -112,16 +126,7 @@
           console.error('could not import BPMN 2.0 diagram', err);
         }
       };
-      
-
-      // load external diagram file via AJAX and open it      
-      $.ajax(
-        {
-          url: site + doc,
-          headers: {"Appian-API-Key": key},
-          dataType: "XML", 
-        },
-       openDiagram, 'text');
+    
      
     </script>
     <!--
