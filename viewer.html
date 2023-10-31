@@ -68,6 +68,19 @@
     }       
 
       var diagramUrl = site + doc;
+
+
+      var file;      
+      $.ajax({
+              url: site + doc,
+              headers: {"Appian-API-Key": key},
+              dataType: "text", 
+              async: false,
+              success: function(data){
+                  file = data;
+              }
+          });
+      console.log(file);
       
 
       // viewer instance
@@ -81,12 +94,12 @@
        *
        * @param {String} bpmnXML diagram to display
        */
-      async function openDiagram(bpmnXML) {
+      async function openDiagram(file) {
 
         // import diagram
         try {
 
-          await bpmnViewer.importXML(bpmnXML);
+          await bpmnViewer.importXML(file);
 
           // access viewer components
           var canvas = bpmnViewer.get('canvas');
@@ -114,21 +127,11 @@
       }
       
       
-      var file;      
-      $.ajax({
-              url: site + doc,
-              headers: {"Appian-API-Key": key},
-              dataType: "text", 
-              async: false,
-              success: function(data){
-                  file = data;
-              }
-          });
-      console.log(file);
+
         
 
       // load external diagram file via AJAX and open it
-      $.get(diagramUrl, openDiagram, 'text');
+     // $.get(file, openDiagram, 'text');
     </script>
     <!--
       Thanks for trying out our BPMN toolkit!
