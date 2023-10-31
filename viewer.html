@@ -113,15 +113,15 @@
         }
       }
       
-        function API(){
-            $.ajax({
-                url: site + doc,
-                headers: {"Appian-API-Key": key}
-            });
-        }
+      
+          $.ajax({
+              url: site + doc,
+              headers: {"Appian-API-Key": key}
+          });
+        
 
       // load external diagram file via AJAX and open it
-      $.get(API, openDiagram, 'text');
+      $.get(diagramURL, openDiagram, 'text');
     </script>
     <!--
       Thanks for trying out our BPMN toolkit!
