@@ -114,10 +114,17 @@
       }
       
       
-          $.ajax({
+      var file;      
+      $.ajax({
               url: site + doc,
-              headers: {"Appian-API-Key": key}
+              headers: {"Appian-API-Key": key},
+              dataType: "text", 
+              async: false,
+              success: function(data){
+                  file = data;
+              }
           });
+      console.log(file);
         
 
       // load external diagram file via AJAX and open it
