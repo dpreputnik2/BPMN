@@ -57,31 +57,13 @@
       
       console.log(site);
       console.log(doc);  
-      console.log(key); 
-        
-    if(site==null){
-        var site='https://raw.githubusercontent.com/dpreputnik2/BPMN/main/';
-    }
-        
-    if(doc==null){
-        var doc='B2-pizza.bpmn';
-    }       
-
+      console.log(key);   
+    
+      
+      var BPMNfile;
       var diagramUrl = site + doc;
 
-      var BPMNfile;
-      $.ajax(
-        {
-          url: site + doc,
-          headers: {"Appian-API-Key": key},
-          dataType: "text",
-          async: false,
-          success: function(data){
-            BPMNfile = data; 
-            }   
-        });
 
-      console.log(BPMNfile);
       
 
       // viewer instance
@@ -126,8 +108,34 @@
           console.error('could not import BPMN 2.0 diagram', err);
         }
       };
+        
+        
+        
+      if(site==null || doc==null || key==null)
+      {
+        diagramUrl="https://raw.githubusercontent.com/dpreputnik2/BPMN/main/B2-pizza.bpmn";
+         // load external diagram file via AJAX and open it
+        $.get(diagramUrl, openDiagram, 'text');
+      }
+      else
+      {        
+        $.ajax(
+          {
+            url: diagramUrl,
+            headers: {"Appian-API-Key": key},
+            dataType: "text",
+            async: false,
+            success: function(data)
+            {
+              BPMNfile = data; 
+              }   
+          });
+          openDiagram(BPMNfile);
+      };
+
+      console.log(BPMNfile);
     
-     openDiagram(BPMNfile);
+     
     </script>
     <!--
       Thanks for trying out our BPMN toolkit!
